@@ -24,3 +24,11 @@ async def get_products(query: str = None):
             if all(keyword in str(product.values()).lower() for keyword in keywords)
         ]
     return products
+
+# another fucntion to get the product by id
+@app.get("/products/{id}", summary="Get a product by id", operation_id="getProductById")
+async def get_product_by_id(id: int):
+    """
+    Returns a product by id.
+    """
+    return next(product for product in products if product["id"] == id)
